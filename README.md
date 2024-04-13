@@ -14,11 +14,11 @@ Segue abaixo o passo a passo para instalação do projeto em sua máquina:
 5. Execute `php artisan key:generate`;
 6. Execute `php artisan migrate` para criar o banco de dados e as tabelas do projeto;
 7. Execute `php artisan db:seed` para popular as tabelas com dados iniciais;
-<!-- 7. Execute `php artisan storage:link`; -->
 8. Execute `npm install`;
 9. Execute `php artisan serve`;
 10. Execute `npm run dev` ou `npm run watch`;
 11. Acesse localhost:8000 (padrão Laravel) ou na porta em que sua máquina estiver configurada.
+<!-- 7. Execute `php artisan storage:link`; -->
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
