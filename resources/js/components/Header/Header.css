@@ -1,0 +1,31 @@
+.header {
+    background-color: #333; /* cor de fundo escura */
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.brand {
+    float: left; /* alinhar à esquerda */
+    padding: 14px 20px;
+    color: #f2f2f2; /* cor do texto */
+    text-decoration: none;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header a {
+    color: #f2f2f2; /* cor do texto */
+    padding: 14px 20px;
+    text-align: center;
+    text-decoration: none;
+ }
+
+.header a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
