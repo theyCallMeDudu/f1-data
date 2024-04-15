@@ -1,0 +1,16 @@
+.div-team-form {
+    width: 30%;
+    margin: auto;
+}
+
+.team-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

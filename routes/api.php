@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/teams', [Controller::class, 'getTeams']);
 Route::get('/drivers', [Controller::class, 'getDrivers']);
+Route::post('/new-team', [Controller::class, 'saveTeam']);
