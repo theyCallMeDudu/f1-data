@@ -8,8 +8,14 @@ function App() {
         { key: 'id', title: 'Id' },
         { key: 'name', title: 'Name' },
         { key: 'year', title: 'Foundation' },
-        { key: 'championships', title: 'Championships' },
-    ]
+        { key: 'championships', title: 'Championships' }
+    ];
+
+    const teamsActions = [
+        { key: 'edit', title: 'Edit' },
+        { key: 'delete', title: 'Delete' },
+    ];
+
     const [teams, setTeams] = useState([]);
 
     const driversColumns = [
@@ -18,7 +24,13 @@ function App() {
         { key: 'birth', title: 'Birth' },
         { key: 'championships', title: 'Championships' },
         { key: 'victories', title: 'Victories' },
-    ]
+    ];
+
+    const driversActions = [
+        { key: 'edit', title: 'Edit' },
+        { key: 'delete', title: 'Delete' },
+    ];
+
     const [drivers, setDrivers] = useState([]);
 
     useEffect(() => {
@@ -41,11 +53,13 @@ function App() {
                 <Header />
                 <Table
                     columns={teamsColumns}
-                    data={teams} />
+                    data={teams}
+                    actions={teamsActions} />
                 <hr />
                 <Table
                     columns={driversColumns}
-                    data={drivers} />
+                    data={drivers}
+                    actions={driversActions} />
             </div>
         </>
     );

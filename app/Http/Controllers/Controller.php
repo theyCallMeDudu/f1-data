@@ -46,4 +46,22 @@ class Controller extends BaseController
         ]);
         return response()->json($team, 201);
     }
+
+    public function editTeam($id)
+    {
+        $team = Team::where('id', '=', $id)->first();
+        return response()->json($team);
+    }
+
+    public function updateTeam(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'year' => 'integer',
+            'championships' => 'integer',
+        ]);
+
+        $team = Team::where('id', '=', $id)->update($validatedData);
+        return response()->json($team, 201);
+    }
 }

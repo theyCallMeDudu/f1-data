@@ -6463,6 +6463,9 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPOR
   path: "/new-team",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Team_Team__WEBPACK_IMPORTED_MODULE_3__["default"], null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  path: "/edit-team/:id",
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Team_Team__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
   path: "/new-driver",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Driver_Driver__WEBPACK_IMPORTED_MODULE_4__["default"], null)
 }))), document.getElementById('react-app'));
@@ -6545,6 +6548,13 @@ function App() {
     key: 'championships',
     title: 'Championships'
   }];
+  var teamsActions = [{
+    key: 'edit',
+    title: 'Edit'
+  }, {
+    key: 'delete',
+    title: 'Delete'
+  }];
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     teams = _useState2[0],
@@ -6564,6 +6574,13 @@ function App() {
   }, {
     key: 'victories',
     title: 'Victories'
+  }];
+  var driversActions = [{
+    key: 'edit',
+    title: 'Edit'
+  }, {
+    key: 'delete',
+    title: 'Delete'
   }];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -6590,10 +6607,12 @@ function App() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Header_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
     columns: teamsColumns,
-    data: teams
+    data: teams,
+    actions: teamsActions
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Table_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
     columns: driversColumns,
-    data: drivers
+    data: drivers,
+    actions: driversActions
   })));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -6616,9 +6635,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function Button(_ref) {
   var text = _ref.text,
-    type = _ref.type;
+    type = _ref.type,
+    onClick = _ref.onClick;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    type: type
+    type: type,
+    onClick: onClick
   }, text));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
@@ -6701,23 +6722,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Table_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Table.css */ "./resources/js/components/Table/Table.css");
+/* harmony import */ var _Button_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button/Button */ "./resources/js/components/Button/Button.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+
+
 
 
 function Table(_ref) {
   var columns = _ref.columns,
-    data = _ref.data;
+    data = _ref.data,
+    actions = _ref.actions;
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, columns.map(function (column) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
       key: column.key
     }, column.title);
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, data.map(function (item, index) {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    key: "actions"
+  }, "Actions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: index
     }, columns.map(function (column) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
         key: column.key
       }, item[column.key]);
-    }));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+      key: "actions"
+    }, actions.map(function (action) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: action.key,
+        text: action.title,
+        onClick: function onClick() {
+          if (action.key === 'edit') {
+            navigate("/edit-team/".concat(item.id));
+          } else if (action.key === 'delete') {
+            //
+          }
+        }
+      });
+    })));
   }))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Table);
@@ -6744,8 +6787,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Team() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TeamForm_TeamForm__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+function Team(_ref) {
+  var id = _ref.id;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TeamForm_TeamForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: id
+  }));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Team);
 
@@ -6787,6 +6833,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function TeamForm() {
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
+    id = _useParams.id;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       name: '',
@@ -6796,6 +6844,19 @@ function TeamForm() {
     _useState2 = _slicedToArray(_useState, 2),
     formData = _useState2[0],
     setFormData = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (id) {
+      fetch("/api/edit-team/".concat(id)).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        setFormData(data);
+      })["catch"](function (error) {
+        return console.error('An error occurred when trying to fetch team data: ', error);
+      });
+    } else {
+      console.log('nada feito', id);
+    }
+  }, [id]);
   function handleChange(e) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, _defineProperty({}, e.target.name, e.target.value)));
   }
@@ -6811,7 +6872,7 @@ function TeamForm() {
             e.preventDefault();
             _context.prev = 1;
             _context.next = 4;
-            return fetch('/api/new-team', {
+            return fetch(id ? "/api/update-team/".concat(id) : '/api/new-team', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -6851,7 +6912,7 @@ function TeamForm() {
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "div-team-form"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "New team"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, id ? 'Edit team' : 'New team'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     className: "team-form",
     onSubmit: handleSubmmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
@@ -6882,7 +6943,10 @@ function TeamForm() {
     className: "team-form-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "button",
-    text: "Cancel"
+    text: "Cancel",
+    onClick: function onClick() {
+      return navigate('/');
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "submit",
     text: "Save"

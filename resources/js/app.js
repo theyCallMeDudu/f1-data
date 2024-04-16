@@ -12,6 +12,7 @@ ReactDOM.render(
         <Routes>
             <Route path='/' element={<App />} />
             <Route path='/new-team' element={<Team />} />
+            <Route path='/edit-team/:id' element={<Team />} />
             <Route path='/new-driver' element={<Driver />} />
         </Routes>
     </BrowserRouter>,

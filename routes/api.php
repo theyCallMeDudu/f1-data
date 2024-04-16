@@ -20,5 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/teams', [Controller::class, 'getTeams']);
-Route::get('/drivers', [Controller::class, 'getDrivers']);
 Route::post('/new-team', [Controller::class, 'saveTeam']);
+Route::get('/edit-team/{id}', [Controller::class, 'editTeam']);
+Route::post('/update-team/{id}', [Controller::class, 'updateTeam']);
+Route::delete('/delete-team/{id}', [Controller::class, 'deleteTeam']);
+
+Route::get('/drivers', [Controller::class, 'getDrivers']);
