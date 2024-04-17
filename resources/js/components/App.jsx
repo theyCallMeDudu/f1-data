@@ -12,8 +12,8 @@ function App() {
     ];
 
     const teamsActions = [
-        { key: 'edit', title: 'Edit' },
-        { key: 'delete', title: 'Delete' },
+        { key: 'editTeam', title: 'Edit' },
+        { key: 'deleteTeam', title: 'Delete' },
     ];
 
     const [teams, setTeams] = useState([]);
@@ -27,8 +27,8 @@ function App() {
     ];
 
     const driversActions = [
-        { key: 'edit', title: 'Edit' },
-        { key: 'delete', title: 'Delete' },
+        { key: 'editDriver', title: 'Edit' },
+        { key: 'deleteDriver', title: 'Delete' },
     ];
 
     const [drivers, setDrivers] = useState([]);

@@ -64,4 +64,11 @@ class Controller extends BaseController
         $team = Team::where('id', '=', $id)->update($validatedData);
         return response()->json($team, 201);
     }
+
+    public function deleteTeam(Request $request, $id)
+    {
+        $team = Team::where('id', '=', $id)->first();
+        $team->delete();
+        return response()->json();
+    }
 }

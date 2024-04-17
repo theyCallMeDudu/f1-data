@@ -6468,6 +6468,9 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPOR
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
   path: "/new-driver",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Driver_Driver__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  path: "/edit-driver/:id",
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Driver_Driver__WEBPACK_IMPORTED_MODULE_4__["default"], null)
 }))), document.getElementById('react-app'));
 
 /***/ }),
@@ -6549,10 +6552,10 @@ function App() {
     title: 'Championships'
   }];
   var teamsActions = [{
-    key: 'edit',
+    key: 'editTeam',
     title: 'Edit'
   }, {
-    key: 'delete',
+    key: 'deleteTeam',
     title: 'Delete'
   }];
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
@@ -6576,10 +6579,10 @@ function App() {
     title: 'Victories'
   }];
   var driversActions = [{
-    key: 'edit',
+    key: 'editDriver',
     title: 'Edit'
   }, {
-    key: 'delete',
+    key: 'deleteDriver',
     title: 'Delete'
   }];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
@@ -6733,6 +6736,23 @@ function Table(_ref) {
     data = _ref.data,
     actions = _ref.actions;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  var handleDelete = function handleDelete(id) {
+    if (window.confirm('Are you sure you want to delete this team?')) {
+      fetch("/api/delete-team/".concat(id), {
+        method: 'DELETE'
+      }).then(function (response) {
+        if (response.ok) {
+          console.log("Team with id ".concat(id, " successfully deleted."));
+          alert("Team with id ".concat(id, " successfully deleted."));
+          window.location.reload();
+        } else {
+          throw new Error('Failed to delete team');
+        }
+      })["catch"](function (error) {
+        return console.error("An error occurred when trying to delete team with id ".concat(id, ". Error: "), error);
+      });
+    }
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, columns.map(function (column) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
       key: column.key
@@ -6753,11 +6773,13 @@ function Table(_ref) {
         key: action.key,
         text: action.title,
         onClick: function onClick() {
-          if (action.key === 'edit') {
+          if (action.key === 'editTeam') {
             navigate("/edit-team/".concat(item.id));
-          } else if (action.key === 'delete') {
-            //
-          }
+          } else if (action.key === 'deleteTeam') {
+            handleDelete(item.id);
+          } else if (action.key === 'editDriver') {
+            navigate("/edit-driver/".concat(item.id));
+          } else if (action.key === 'deleteDriver') {}
         }
       });
     })));

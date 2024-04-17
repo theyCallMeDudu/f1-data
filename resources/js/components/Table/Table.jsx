@@ -7,6 +7,24 @@ function Table({ columns, data, actions }) {
 
     const navigate = useNavigate();
 
+    const handleDelete = (id) => {
+        if (window.confirm('Are you sure you want to delete this team?')) {
+            fetch(`/api/delete-team/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log(`Team with id ${id} successfully deleted.`);
+                    alert(`Team with id ${id} successfully deleted.`);
+                    window.location.reload();
+                } else {
+                    throw new Error('Failed to delete team');
+                }
+            })
+            .catch(error => console.error(`An error occurred when trying to delete team with id ${id}. Error: `, error));
+        }
+    }
+
     return (
         <>
             <table>
@@ -30,10 +48,14 @@ function Table({ columns, data, actions }) {
                                         key={action.key}
                                         text={action.title}
                                         onClick={() => {
-                                            if (action.key === 'edit') {
+                                            if (action.key === 'editTeam') {
                                                 navigate(`/edit-team/${item.id}`);
-                                            } else if (action.key === 'delete') {
-                                                //
+                                            } else if (action.key === 'deleteTeam') {
+                                                handleDelete(item.id);
+                                            } else if (action.key === 'editDriver') {
+                                                navigate(`/edit-driver/${item.id}`);
+                                            } else if (action.key === 'deleteDriver') {
+
                                             }
                                         }} />
                                 ))}
